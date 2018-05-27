@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="model" default="$(find urdf_example)/urdf/robot40.urdf.xacro"/>
+  <arg name="rvizconfig" default="$(find urdf_example)/rviz/urdf.rviz" />
+  <arg name="limited" default="false"/>
+  <arg name="paused" default="false"/>
+  <arg name="gui" default="true"/>
+  <arg name="sim" default="true"/>
+  
+  <!-- startup simulated world -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(find urdf_example)/worlds/urdf_example.world"/>
+     <!-- more default parameters can be changed here -->
+  </include>
+
+  <param name="robot_description" command="$(find xacro)/xacro.py $(arg model)" />
+  
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" />
+
+  <!-- push robot_description to factory and spawn robot in gazebo -->
+  <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model robot -z 0.1" respawn="false" output="screen" />
+  
+</launch>

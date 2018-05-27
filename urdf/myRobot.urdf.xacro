@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<robot name="robot40" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:property name="baseWidth" value="0.65" />
+  <xacro:property name="baseLength" value="0.25" />
+  <xacro:property name="baseHeight" value="0.15" />
+  <xacro:property name="baseMass" value="20" />
+  
+  <material name="blue">
+    <color rgba="0 0 0.8 1"/>
+  </material>
+  
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="${baseWidth} ${baseLength} ${baseHeight}"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="${baseWidth} ${baseLength} ${baseHeight}"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="${baseMass}" />
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
+    </inertial>
+  </link>
+  
+  <!-- Gazebo plugin for ROS Control -->
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/</robotNamespace>
+    </plugin>
+  </gazebo>
+
+</robot>
