@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <launch>
-  <arg name="model" default="$(find urdf_example)/urdf/robot40.urdf.xacro"/>
+  <arg name="model" default="$(find urdf_example)/urdf/myRobot.urdf.xacro"/>
   <arg name="rvizconfig" default="$(find urdf_example)/rviz/urdf.rviz" />
   <arg name="limited" default="false"/>
   <arg name="paused" default="false"/>
